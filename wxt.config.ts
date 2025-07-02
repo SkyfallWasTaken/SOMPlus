@@ -6,5 +6,6 @@ export default defineConfig({
   modules: ["@wxt-dev/module-svelte"],
   manifest: {
     name: "SOM Plus",
+    host_permissions: ["https://summer.hackclub.com/*"],
   },
 });
