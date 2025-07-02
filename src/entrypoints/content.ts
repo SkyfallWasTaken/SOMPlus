@@ -1,6 +1,17 @@
 export default defineContentScript({
-  matches: ['*://summer.hackclub.com/shop'],
+  matches: ["*://summer.hackclub.com/shop"],
   main() {
-    console.log('Hello content.');
+    console.log("Hello content.");
+
+    const grid = document.querySelector(".sm\\:grid");
+    if (!grid) {
+      throw new Error(`Grid element not found whilst looking at items`);
+    }
+
+    for (const child of grid.children) {
+      const descriptionEl = child.querySelector("div.mb-4 > p.text-gray-700");
+      const purchaseUrl = child.querySelector("form")?.action.trim()!;
+      const id = Number(purchaseUrl.replace(/[^0-9]/g, ""));
+    }
   },
 });
