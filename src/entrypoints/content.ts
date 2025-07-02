@@ -1,7 +1,11 @@
 export default defineContentScript({
   matches: ["*://summer.hackclub.com/shop"],
-  main() {
+  async main() {
     console.log("Hello content.");
+    const response = await fetch(
+      "https://github.com/SkyfallWasTaken/SOMPlus/raw/refs/heads/main/remapped-descriptions.json"
+    );
+    const json = await response.json();
 
     const grid = document.querySelector(".sm\\:grid");
     if (!grid) {
@@ -12,6 +16,9 @@ export default defineContentScript({
       const descriptionEl = child.querySelector("div.mb-4 > p.text-gray-700");
       const purchaseUrl = child.querySelector("form")?.action.trim()!;
       const id = Number(purchaseUrl.replace(/[^0-9]/g, ""));
+      if (json[id] && descriptionEl) {
+        descriptionEl.innerHTML = json[id];
+      }
     }
   },
 });
