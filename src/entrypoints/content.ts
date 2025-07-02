@@ -3,7 +3,7 @@ export default defineContentScript({
   async main() {
     console.log("Hello content.");
     const response = await fetch(
-      "https://github.com/SkyfallWasTaken/SOMPlus/raw/refs/heads/main/remapped-descriptions.json"
+      "https://cdn.jsdelivr.net/gh/SkyfallWasTaken/SOMPlus@raw/refs/heads/main/remapped-descriptions.json"
     );
     const json = await response.json();
 
